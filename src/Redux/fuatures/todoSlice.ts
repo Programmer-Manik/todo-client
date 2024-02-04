@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 type tTodo = {
+   id:string;
    title:string;
    description:string;
    isCompleted?:boolean;
@@ -17,10 +18,13 @@ const initialState:TInitialState = {
       addTodo:(state, action:PayloadAction<tTodo>) => {
          state.todos.push({...action.payload, 
             isCompleted:false});
-      }
+      },
+      removeTodo:(state, action:PayloadAction<string>) => {
+       state.todos =  state.todos.filter((item) => item.id !== action.payload);
+      },
    },
 })
 
-export const {addTodo} = todoSlice.actions;
+export const {addTodo,removeTodo} = todoSlice.actions;
 
 export default todoSlice.reducer
