@@ -1,20 +1,15 @@
 import { useAppDispatch } from "@/Redux/hooks";
 import { Button } from "../ui/button";
 import { removeTodo, toggleComplete } from "@/Redux/fuatures/todoSlice";
-type tTodoCord = {
-  id: string;
-  title: string;
-  description: string;
-  isCompleted?: boolean;
-};
-const TodoCord = ({ title, description, id, isCompleted }: tTodoCord) => {
+type tTodoCord = {id:string; title:string; description:string; isCompleted?:boolean;};
+const TodoCord = ({ title, description, id, isCompleted, }: tTodoCord) => {
   const dispatch = useAppDispatch();
    const toggleCompleted = () => {
-      dispatch(toggleComplete(id))
+     dispatch(toggleComplete(id))
    }
   return (
     <div className="bg-white rounded-md flex justify-between items-center p-3">
-      <input onChange={toggleCompleted} type="checkbox" name="" id="" />
+      <input onChange={toggleCompleted} type="checkbox" name="checkbox" id="" />
       <p className="font-semibold">{title}</p>
       {/* <p>time</p> */}
       <div>
@@ -62,5 +57,4 @@ const TodoCord = ({ title, description, id, isCompleted }: tTodoCord) => {
     </div>
   );
 };
-
 export default TodoCord;
