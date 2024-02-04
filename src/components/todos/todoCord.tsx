@@ -1,18 +1,29 @@
 import { useAppDispatch } from "@/Redux/hooks";
 import { Button } from "../ui/button";
-import { removeTodo } from "@/Redux/fuatures/todoSlice";
+import { removeTodo, toggleComplete } from "@/Redux/fuatures/todoSlice";
 type tTodoCord = {
-  id:string;
-  title:string;
-  description:string;
-}
-const TodoCord = ({title, description,id}:tTodoCord) => {
+  id: string;
+  title: string;
+  description: string;
+  isCompleted?: boolean;
+};
+const TodoCord = ({ title, description, id, isCompleted }: tTodoCord) => {
   const dispatch = useAppDispatch();
+   const toggleCompleted = () => {
+      dispatch(toggleComplete(id))
+   }
   return (
     <div className="bg-white rounded-md flex justify-between items-center p-3">
-      <input type="checkbox" name="" id="" />
+      <input onChange={toggleCompleted} type="checkbox" name="" id="" />
       <p className="font-semibold">{title}</p>
       {/* <p>time</p> */}
+      <div>
+        {isCompleted ? (
+          <p className="text-green-500 font-semibold ">Success</p>
+        ) : (
+          <p className="text-red-500 font-semibold">Pending</p>
+        )}
+      </div>
       <p>{description}</p>
       <div className="space-y-5 space-x-5">
         <Button onClick={() => dispatch(removeTodo(id))} className="bg-red-500">
