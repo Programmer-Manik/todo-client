@@ -10,7 +10,8 @@ const TodoContainer = () => {
   //from server
 
  
-  const {data:todos,isLoading, isError} = useGetTodosQuery(undefined);
+  // const {data:todos,isLoading,} = useGetTodosQuery(undefined,{pollingInterval:1000});
+  const {data:todos,isLoading,} = useGetTodosQuery(undefined);
   if(isLoading){
     return <p>Loading...</p>
   }
