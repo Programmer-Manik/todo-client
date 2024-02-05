@@ -14,7 +14,7 @@ import { Label } from "../ui/label";
 // import { useAppDispatch,  } from "@/Redux/hooks";
 import { addTodo } from "@/Redux/fuatures/todoSlice";
 import { useAddTodosMutation } from "@/Redux/api/api";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select";
 const AddTodoModul = () => {
   const [task, setTask] = useState("");
   const [description, setDescription] = useState("");
@@ -46,7 +46,8 @@ const AddTodoModul = () => {
     const taskDetails = {
       title: task,
       description: description,
-      //priority
+      isCompleted:false,
+      priority,
     };
     addTodo(taskDetails);
   };
@@ -88,7 +89,7 @@ const AddTodoModul = () => {
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label className="text-right">Priority</Label>
-              <Select>
+              <Select onValueChange={(value)=> setPriority(value)}>
                 <SelectTrigger className="col-span-3">
                   <SelectValue placeholder="Select a fruit" />
                 </SelectTrigger>
