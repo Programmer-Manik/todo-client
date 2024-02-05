@@ -1,15 +1,33 @@
 import { useAppDispatch } from "@/Redux/hooks";
 import { Button } from "../ui/button";
 import { removeTodo, toggleComplete } from "@/Redux/fuatures/todoSlice";
-type tTodoCord = {id:string; title:string;priority:string; description:string; isCompleted?:boolean;};
-const TodoCord = ({ title, description, id, isCompleted,priority }: tTodoCord) => {
-  const dispatch = useAppDispatch();
-   const toggleCompleted = () => {
-     dispatch(toggleComplete(id))
+import { useUpdateTodosMutation } from "@/Redux/api/api";
+type tTodoCord = {_id:string; title:string;priority:string; description:string; isCompleted?:boolean;};
+const TodoCord = ({ title, description, _id, isCompleted,priority }: tTodoCord) => {
+  // const dispatch = useAppDispatch();
+   
+  const [updateTodo, {isLoading}] = useUpdateTodosMutation();
+  const toggleCompleted = () => {
+    //  dispatch(toggleComplete(id))
+    const taskData = {
+      title,
+      description,
+      priority,
+      isCompleted: !isCompleted
+    };
+     
+    const options = {
+      id:_id,
+      data: taskData,
+    } 
+
+    console.log(options)
+
+    updateTodo(options)
    }
   return (
     <div className="bg-white rounded-md flex justify-between items-center p-3">
-      <input className="mr-3" onChange={toggleCompleted} type="checkbox" name="checkbox" id="" />
+      <input className="mr-3" defaultChecked={isCompleted} onChange={toggleCompleted} type="checkbox" name="checkbox" id="" />
       <p className="font-semibold flex-1">{title}</p>
       <div className="flex-1 flex items-center gap-2 ">
         <div className={`
