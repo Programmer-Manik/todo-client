@@ -20,7 +20,7 @@ const TodoContainer = () => {
       </div>
       <div className="bg-primary-gradient w-full h-full rounded-xl  p-[5px]">
           {todos.map((item) => <TodoCord {...item}/>)}
-          {/* {todos?.map((item) => <TodoCord {...item}/>)} */}
+          {/* {todos?.data?.map((item) => <TodoCord {...item}/>)} */}
         <div className="bg-white p-5 w-full h-full rounded-lg space-y-3">
         </div>
           {/* <div className="bg-white text-2xl font-bold p-5 flex justify-center items-center rounded-md">
