@@ -1,25 +1,50 @@
 import { FormEvent, useState } from "react";
 import { Button } from "../ui/button";
-import {Dialog,DialogClose,DialogContent,DialogDescription,DialogHeader,DialogTitle,DialogTrigger,
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "../ui/dialog";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { useAppDispatch,  } from "@/Redux/hooks";
+// import { useAppDispatch,  } from "@/Redux/hooks";
 import { addTodo } from "@/Redux/fuatures/todoSlice";
+import { useAddTodosMutation } from "@/Redux/api/api";
 const AddTodoModul = () => {
   const [task, setTask] = useState("");
   const [description, setDescription] = useState("");
-  const Dispatch = useAppDispatch()
-  
+
+  //for local state management
+  //const Dispatch = useAppDispatch()
+
+  // for server
+  //? [actualFunctionPost, {data , isLoading, isError}] =useAddTodosMutation();
+  const [addTodo, {data ,isLoading, isError , isSuccess}] = useAddTodosMutation();
+  console.log({data,isLoading, isError, isSuccess,})
+
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const randomString = Math.random().toString(36).substring(2,7);
+    
+    //for local state management
+    // const randomString = Math.random().toString(36).substring(2, 7);
+    // const taskDetails = {
+    //   id: randomString,
+    //   title: task,
+    //   description: description,
+    // };
+    //Dispatch(addTodo(taskDetails))
+    
+    //for server 
     const taskDetails = {
-      id:randomString,
-      title: task,
-      description:description,
-    };
-    Dispatch(addTodo(taskDetails))
+        title: task,
+        description: description,
+        //priority
+      };
+    addTodo(taskDetails)
   };
   return (
     <Dialog>
